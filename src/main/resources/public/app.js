@@ -62,7 +62,7 @@
                         description : document.getElementById("description").value
                     }
 
-        if (data.title.indexOf('пидор') || data.description.indexOf('пидор')) {
+        if (data.title.indexOf('пидор') != -1 || data.description.indexOf('пидор') != -1) {
             alert('сам пидор!!!!');
             return;
         }
