@@ -12,13 +12,13 @@
 
 	var popup = L.popup();
 
-    var currentMarker = {};
+    var currentMarker = null;
 
 	function onMapClick(e) {
         lat = e.latlng.lat;
         lng = e.latlng.lng;
 
-        if (currentMarker != undefined) {
+        if (currentMarker != null) {
               map.removeLayer(currentMarker);
         };
 
@@ -45,7 +45,7 @@
             response.json().then(function(data) {
               data.forEach(function(element) {
                     L.marker([element.latitude, element.longitude]).addTo(map)
-              		    .bindPopup("<b>" + element.title + "</b><br />" + element.description).openPopup();
+              		    .bindPopup("<b>" + element.title + "</b><br />" + element.description);
               });
             });
         })
@@ -62,6 +62,10 @@
                         description : document.getElementById("description").value
                     }
 
+        if (data.title.indexOf('пидор') || data.description.indexOf('пидор')) {
+            alert('сам пидор!!!!');
+            return;
+        }
         fetch(url, {
             method: 'POST',
             body: JSON.stringify(data),
@@ -73,8 +77,12 @@
             alert("Something went wrong!");
         })
         .then(response => {
+            if (currentMarker === null) {
+                alert("Choose location m'fucker!");
+                return;
+            }
             currentMarker.bindPopup("<b>" + data.title + "</b><br />" + data.description).openPopup();
-            currentMarker = {};
+            currentMarker = null;
 
             document.getElementById("title").value = "";
             document.getElementsByClassName("jsCurLat")[0].innerHTML = "";
@@ -87,7 +95,7 @@
 
 	function onClear(e) {
 	    map.removeLayer(currentMarker);
-	    currentMarker = {};
+	    currentMarker = null;
 
 	    document.getElementById("title").value = "";
         document.getElementsByClassName("jsCurLat")[0].innerHTML = "";
