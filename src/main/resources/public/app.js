@@ -69,7 +69,9 @@
               'Content-Type': 'application/json'
             }
         }).then(res => res)
-        .catch(error => console.error('Error:', error))
+        .catch(error => {
+            alert("Something went wrong!");
+        })
         .then(response => {
             currentMarker.bindPopup("<b>" + data.title + "</b><br />" + data.description).openPopup();
             currentMarker = {};

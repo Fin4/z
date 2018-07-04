@@ -7,6 +7,7 @@ import lombok.Setter;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Getter @Setter @NoArgsConstructor
@@ -16,7 +17,9 @@ public class Place {
     @GeneratedValue
     private Long id;
 
+    @NotNull
     private Float latitude;
+    @NotNull
     private Float longitude;
 
     private String title;
