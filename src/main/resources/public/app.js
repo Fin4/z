@@ -32,7 +32,7 @@
 
 	function loadAll() {
 
-        var url = 'http://localhost:8080/places';
+        var url = '/places';
 
         fetch(url)
         .then(function(response) {
@@ -54,7 +54,7 @@
 	}
 
 	function onSave(e) {
-	    var url = 'http://localhost:8080/places';
+	    var url = '/places';
         var data = {
                         title : document.getElementById("title").value,
                         latitude : document.getElementsByClassName("jsCurLat")[0].innerHTML,
